@@ -10,6 +10,8 @@ using namespace std;
 static option_t options[] = {
 	{1, "i", "input", "-", opt_input, OPT_DEFAULT},
 	{1, "o", "output", "-", opt_output, OPT_DEFAULT},
+	{1, "r", "regression", "-", opt_regression, OPT_DEFAULT},
+	{1, "e", "error", "1e-3", opt_error, OPT_DEFAULT},
 	{1, "m", "method", "FFT", opt_method, OPT_DEFAULT},
 	{0, "h", "help", nullptr, opt_help, OPT_DEFAULT},
 	{0, },
@@ -21,6 +23,7 @@ static istream *iss = nullptr;
 static ostream *oss = nullptr;
 static fstream ifs;
 static fstream ofs;
+static ifstream rfs;
 
 static void
 opt_input(string const &arg)
@@ -59,6 +62,35 @@ opt_output(string const &arg)
 		     << endl;
 		exit(1);
 	}
+}
+
+static void
+opt_regression(string const &arg)
+{
+	if(arg == "-") {
+		cerr << " Missing regression file ";
+		exit(1);
+	} 
+	
+	rfs.open(arg.c_str(), ios::in);
+	if (!rfs.good()) {
+		cerr << "Cannot open "
+		     << arg
+		     << "."
+		     << endl;
+		exit(1);
+	}
+}
+
+static void
+opt_error(string const &arg)
+{
+	if(arg != "-" ){
+		Complex::acceptableDelta(strtold(arg,/* ptr post numero*/ ));
+	}
+
+	//Si no ponen valor a error, ya tiene su valor por defecto.
+
 }
 
 static void
@@ -124,6 +156,8 @@ main(int argc, char * const argv[])
 
 	bool status = process(*::transform, *iss, *oss);
 	
+	status = regression(*::transform, *oss, rfs);
+
 	delete ::transform;
 	::transform = nullptr;
 

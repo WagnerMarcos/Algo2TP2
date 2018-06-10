@@ -71,6 +71,9 @@ process(FourierTransform& transform, istream& is, ostream& os)
 			print_msg("Cannot write to output stream.");
 			return false;
 		}
+
+		// vacía los vectores para reutilizarlos en el siguiente ciclo. 
+
 		inSignal.clear();
 		outSignal.clear();
 	}
