@@ -19,11 +19,12 @@ static option_t options[] = {
 
 static char *program_name;
 static FourierTransform *transform;
-static istream *iss = nullptr;
-static ostream *oss = nullptr;
+static istream *iss;
+static ostream *oss;
+static ifstream *rfs;
 static fstream ifs;
 static fstream ofs;
-static ifstream rfs;
+
 
 static void
 opt_input(string const &arg)
@@ -68,12 +69,12 @@ static void
 opt_regression(string const &arg)
 {
 	if(arg == "-") {
-		cerr << " Missing regression file ";
-		exit(1);
+		rfs = nullptr;
+		return;
 	} 
 	
-	rfs.open(arg.c_str(), ios::in);
-	if (!rfs.good()) {
+	rfs->open(arg.c_str(), ios::in);
+	if (!rfs->good()) {
 		cerr << "Cannot open "
 		     << arg
 		     << "."
@@ -85,8 +86,10 @@ opt_regression(string const &arg)
 static void
 opt_error(string const &arg)
 {
-	if(arg != "-" ){
-		Complex::acceptableDelta(strtold(arg,/* ptr post numero*/ ));
+	if(arg != "-" ) {
+		Complex<long double>::acceptable_delta(
+			strtold(arg.c_str(),nullptr)
+		);
 	}
 
 	//Si no ponen valor a error, ya tiene su valor por defecto.
@@ -154,9 +157,7 @@ main(int argc, char * const argv[])
 	oss->setf(ios::fixed, ios::floatfield);
 	oss->precision(6);
 
-	bool status = process(*::transform, *iss, *oss);
-	
-	status = regression(*::transform, *oss, rfs);
+	bool status = process(*::transform, *iss, *oss, rfs);
 
 	delete ::transform;
 	::transform = nullptr;

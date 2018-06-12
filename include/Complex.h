@@ -14,6 +14,7 @@ template <typename T = long double>
 class Complex {
 	T x;
 	T y;
+	static T acceptableDelta;
 public:
 	Complex(T real = 0, T imag = 0) : x(real), y(imag) {}
 	Complex(const Complex& C) : x(C.x), y(C.y) {}
@@ -21,7 +22,12 @@ public:
 
 	T re() const { return x; }
 	T im() const { return y; }
-
+	static T acceptable_delta() {
+		return Complex::acceptableDelta;
+	}
+	static T acceptable_delta(const T& delta) {
+		return Complex::acceptableDelta = delta;
+	}
 	const Complex conj() const {
 		return Complex(x, -y);
 	}
@@ -123,15 +129,10 @@ public:
 	}
 };
 
-const Complex <long double> I(0, 1);
-const long double Complex_acceptableDelta = 10e-6;
+template <typename T>
+T Complex<T>::acceptableDelta = 10e-3;
 
-template <typename T> Complex <T>
-exp(const Complex <T> & c)
-{
-	return typename Complex<T>::Complex( std::exp (c.re()) * std::cos(c.im()),
-	       std::exp(c.re()) * std::sin(c.im()));
-}
+const Complex <long double> I(0, 1);
 
 // Función para la comparación que comprueba si dos números difieren en lo
 // suficientemente poco.
@@ -142,17 +143,23 @@ almostEqual(T a, T b)
 	const T absA = std::abs(a);
 	const T absB = std::abs(b);
 	const T absDelta = std::abs(a - b);
-	const bool deltaIsAcceptable = absDelta <= Complex_acceptableDelta;
 
 	if (a == b) // si son iguales, incluso inf
 		return true;
 	// si a o b son cero, o están lo suficientemente cerca
 	//
-	if (a == 0 || b == 0 || deltaIsAcceptable)
+	if (a == 0 || b == 0 || Complex<T>::acceptable_delta())
 		return true;
 	// sino, usar el error relativo
-	return Complex_acceptableDelta >
+	return Complex<T>::acceptable_delta() >
 	       absDelta / std::min<T>(absA + absB, std::numeric_limits<T>::max());
+}
+
+template <typename T> Complex <T>
+exp(const Complex <T> & c)
+{
+	return typename Complex<T>::Complex( std::exp (c.re()) * std::cos(c.im()),
+	       std::exp(c.re()) * std::sin(c.im()));
 }
 
 #endif	//_COMPLEX_H_INCLUDED_

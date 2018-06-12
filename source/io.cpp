@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <sstream>
+#include <string>
+#include <fstream>
 
 #include "io.h"
 
@@ -37,7 +39,7 @@ print_msg(string const & msg)
 }
 
 bool
-process(FourierTransform& transform, istream& is, ostream& os)
+process(FourierTransform& transform, istream& is, ostream& os, ifstream *rfs)
 {
 	ComplexVector inSignal;
 	ComplexVector outSignal;
@@ -66,6 +68,8 @@ process(FourierTransform& transform, istream& is, ostream& os)
 			return false;
 		}
 
+		status = regression(outSignal, rfs);
+
 		status = print_signal(os, outSignal);
 		if (!status) {
 			print_msg("Cannot write to output stream.");
@@ -79,3 +83,46 @@ process(FourierTransform& transform, istream& is, ostream& os)
 	}
 	return true;
 }
+
+bool
+regression(ComplexVector outputVector, ifstream *rfs)
+{
+	string s;
+	istringstream line;
+
+	Complex <long double> regressionComplex;
+	Complex <long double> aux;
+	long double aux1=0;
+	long double aux2=0;
+
+	long double regressionError;
+
+	getline((*rfs), s);
+
+	line.str(s);
+
+
+	for(size_t i; i < outputVector.size(); ++i) {
+		
+		line >> regressionComplex;
+		aux= outputVector[i] - regressionComplex; 
+
+		aux1 += aux.norm() ;
+		aux1 *= aux1 ;
+		aux2 += regressionComplex.norm() ;
+		aux2 *= aux2 ;
+
+
+
+	}
+
+	regressionError += sqrt( aux1/aux2 );
+
+	cout << regressionError << endl;
+
+	return true;
+}
+
+
+
+

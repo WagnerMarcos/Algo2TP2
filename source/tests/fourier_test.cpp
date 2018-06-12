@@ -221,7 +221,7 @@ int main(int argc, char **argv) {
 	     << endl
 	     << "Se considera que dos números son iguales si "
 	     << "el módulo de su diferencia es menor o igual a "
-	     << Complex_acceptableDelta
+	     << Complex<long double>::acceptable_delta()
 	     << "."
 	     << endl;
 	
