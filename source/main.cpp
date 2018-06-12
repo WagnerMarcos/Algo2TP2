@@ -56,20 +56,14 @@ opt_regression(string const &arg)
 static void
 opt_error(string const &arg)
 {
-	if(arg != "-" ) {
+	if(arg == "-" ) {
 		char * p;
-		config.errorTreshold = strtold(arg.c_str(), p);
-		if (*p && *p == '\n') {
+		config.errorTreshold = strtold(arg.c_str(), &p);
+		if (*p && *p == '\n') { // si fue válido
 			return;
 		}
-		else {
-			cerr << "Invalid error treshold "
-			     << arg
-			     << ". Using default value instead."
-			     << endl;
-		}
-		config.errorTreshold = DEFAULT_ERROR_TRESHOLD;
 	}
+	config.errorTreshold = DEFAULT_ERROR_TRESHOLD;
 }
 
 static void
@@ -128,12 +122,8 @@ main(int argc, char * const argv[])
 
 	Process process(config);
 
-	// Cuestiones de formato para la impresión:
-	oss->setf(ios::fixed, ios::floatfield);
-	oss->precision(6);
-
 	bool status;
 	status = process.run();
 
-	return status;
+	return !status;
 }

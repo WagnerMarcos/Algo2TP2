@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 
 #include "process.h"
 
@@ -13,18 +14,19 @@ Configuration::~Configuration() {
 	delete transform;
 }
 
-Process::Process(Config config)  : conf(config) {
+Process::Process(Configuration const& config)  : conf(config) {
 	configurate();
 }
 
 void Process::configurate() {
 	if (!conf.input || !conf.input->good())
-		cerr << "Could not open input file" << endl;
+		cerr << "Could not open input file." << endl;
 	if (!conf.output || !conf.output->good())
-		cerr << "Could not open output file" << endl;
+		cerr << "Could not open output file." << endl;
 	if (conf.regression && !conf.regression->good())
-		cerr << "Could not open regression file" << endl;
-	
+		cerr << "Could not open regression file." << endl;
+	conf.output->setf(ios::fixed, ios::floatfield);
+	conf.output->precision(6);
 }
 
 bool
@@ -35,8 +37,9 @@ Process::run() {
 	string s;
 	bool status;
 
-	for (int lineNo = 1; getline(is, s); ++lineNo) {
-		if (input->bad()) {
+	for (int lineNo = 1; getline(*conf.input, s); ++lineNo) {
+		
+		if (conf.input->bad()) {
 			cerr << "An error occured while processing line "
 			     << lineNo
 			     << "."
@@ -44,10 +47,11 @@ Process::run() {
 			return false;
 		}
 		
-		line.clear(); // vacía los flags del istringstream
 		line.str(s);
-
+		line.clear(); // vacía los flags del istringstream
+		
 		status = load_signal(line, inSignal);
+		
 		if (!status) {
 			cerr << "Error processing \""
 			     << line.str()
@@ -58,14 +62,16 @@ Process::run() {
 			return false;
 		}
 
-		status = conf.transform.compute(inSignal, outSignal);
+		status = conf.transform->compute(inSignal, outSignal);
+		
 		if (!status) {
 			cerr << "An error occured while performing the requested operation."
 			     << endl;
 			return false;
 		}
-
-		status = print_signal(os, outSignal);
+		
+		status = print_signal(*conf.output, outSignal);
+		
 		if (!status) {
 			cerr << "Cannot write to output stream."
 			     << endl;

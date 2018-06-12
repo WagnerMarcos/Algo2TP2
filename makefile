@@ -13,14 +13,17 @@ cmdline.o: $(SRC)/cmdline.cpp $(INCLUDE)/cmdline.h
 fourier.o: $(SRC)/fourier.cpp $(INCLUDE)/fourier.h $(INCLUDE)/Complex.h $(INCLUDE)/Vector.h
 	$(CXX) $(CXXFLAGS) $(CXXARGS) -c $(SRC)/fourier.cpp -o fourier.o
 
-io.o: $(SRC)/io.cpp $(INCLUDE)/io.h $(INCLUDE)/Complex.h $(INCLUDE)/Vector.h
+io.o: $(SRC)/io.cpp $(INCLUDE)/io.h $(INCLUDE)/fourier.h $(INCLUDE)/Complex.h $(INCLUDE)/Vector.h
 	$(CXX) $(CXXFLAGS) $(CXXARGS) -c $(SRC)/io.cpp -o io.o
 
-main.o: $(SRC)/main.cpp $(INCLUDE)/main.h $(INCLUDE)/io.h $(INCLUDE)/Complex.h $(INCLUDE)/Vector.h $(INCLUDE)/cmdline.h $(INCLUDE)/fourier.h
+process.o: $(SRC)/process.cpp $(INCLUDE)/io.h $(INCLUDE)/Complex.h $(INCLUDE)/Vector.h
+	$(CXX) $(CXXFLAGS) $(CXXARGS) -c $(SRC)/process.cpp -o process.o
+
+main.o: $(SRC)/main.cpp $(INCLUDE)/main.h $(INCLUDE)/process.h $(INCLUDE)/cmdline.h $(INCLUDE)/fourier.h
 	$(CXX) $(CXXFLAGS) $(CXXARGS) -c $(SRC)/main.cpp -o main.o
 
-fourier.exe: cmdline.o fourier.o io.o main.o
-	$(CXX) $(CXXFLAGS) $(CXXARGS) cmdline.o fourier.o  io.o main.o -o fourier.exe
+fourier.exe: cmdline.o fourier.o io.o process.o main.o
+	$(CXX) $(CXXFLAGS) $(CXXARGS) cmdline.o fourier.o  io.o process.o main.o -o fourier.exe
 
 gtest-all.o:
 	$(CXX) $(CXXFLAGS) -isystem $(GOOGLETEST)/include -I$(GOOGLETEST) -pthread -c $(GOOGLETEST)/src/gtest-all.cc -o gtest-all.o
