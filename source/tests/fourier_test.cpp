@@ -137,12 +137,12 @@ namespace {
 		}
 		void read_vectors_from_files() {
 			ifs.open(test_files[i], ios::in);
-			if (!load_signal(ifs, *originalVector))
+			if (!load_signal(ifs, originalVector))
 				exit(1);
 			ifs.close();
 			++i;
 			ifs.open(test_files[i], ios::in);
-			if (!load_signal(ifs, *transformedVector))
+			if (!load_signal(ifs, transformedVector))
 				exit(1);
 			ifs.close();
 			++i;
@@ -151,10 +151,10 @@ namespace {
 		}
 		size_t i;
 		ifstream ifs;
-		ComplexVector *originalVector;
-		ComplexVector *transformedVector;
-		ComplexVector *FTOutput;
-		ComplexVector *IFTOutput;
+		ComplexVector originalVector;
+		ComplexVector transformedVector;
+		ComplexVector FTOutput;
+		ComplexVector IFTOutput;
 	};
 
 	TEST_F(RandomVectors, FTandIFT) {
@@ -166,23 +166,19 @@ namespace {
 
 	TEST_F(VectorsFromFiles, FTandIFT) {
 		while (i < file_amount) {
-			originalVector = new ComplexVector;
-			transformedVector = new ComplexVector;
-			FTOutput = new  ComplexVector;
-			IFTOutput = new ComplexVector;
 			read_vectors_from_files();	
-			if (!ft->compute(*originalVector, *FTOutput))
+			if (!ft->compute(originalVector, FTOutput))
 				exit(1);
-			for (size_t j = 0 ; j < originalVector->size(); ++j)
-				EXPECT_EQ((*transformedVector)[j], (*FTOutput)[j]);
-			if (!ift->compute(*transformedVector, *IFTOutput))
+			for (size_t j = 0 ; j < originalVector.size(); ++j)
+				EXPECT_EQ(transformedVector[j], FTOutput[j]);
+			if (!ift->compute(transformedVector, IFTOutput))
 				exit(1);
-			for (size_t j = 0 ; j < originalVector->size(); ++j)
-				EXPECT_EQ((*originalVector)[j], (*IFTOutput)[j]);
-			delete transformedVector; 
-			delete FTOutput;
-			delete originalVector;
-			delete IFTOutput;
+			for (size_t j = 0 ; j < originalVector.size(); ++j)
+				EXPECT_EQ(originalVector[j], IFTOutput[j]);
+			transformedVector.clear();
+			originalVector.clear();
+			FTOutput.clear();
+			IFTOutput.clear();
 		}
 	}
 

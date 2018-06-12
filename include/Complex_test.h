@@ -5,7 +5,7 @@
 #include "Complex.h"
 #include "Vector.h"
 
-#define DEFAULT_AMOUNT "10000"
+#define DEFAULT_AMOUNT "1000000"
 
 static void opt_number(std::string const &arg);
 static void opt_help(std::string const &arg);
