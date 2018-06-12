@@ -7,6 +7,20 @@
 
 #include "Complex_test.h"
 
+#define TEST_UNARY_OP(OP) { \
+	for (size_t i = 0; i < vectorSize; ++i) \
+			EXPECT_EQ(OP(stdComplex[i]), myComplex[i].OP()); \
+}
+
+#define TEST_BINARY_OP(OP) { \
+		for (size_t i=0, j = vectorSize-1; i < vectorSize && j >= 0; ++i,--j) \
+			EXPECT_EQ( \
+				OP(stdComplex[i], stdComplex[j]), \
+				myComplex[i].OP(myComplex[j]) \
+			); \
+}
+using namespace std;
+
 static char *program_name;
 static size_t vectorSize;
 
@@ -16,47 +30,66 @@ static option_t options[] = {
 	{0, },
 };
 
-static void
-opt_number(std::string const &arg)
+void
+opt_number(string const &arg)
 {
-	std::istringstream iss(arg);
+	istringstream iss(arg);
 
 	if (!(iss >> vectorSize) || !iss.eof()) {
-		std::cerr << "Not a possible amount: "
-		          << arg
-		          << "."
-		          << std::endl;
+		cerr << "Not a possible amount: "
+		     << arg
+		     << "."
+		     << endl;
 		exit(1);
 	}
 	if (iss.bad()) {
-		std::cerr << "Cannot read amount."
-		          << std::endl;
+		cerr << "Cannot read amount."
+		     << endl;
 		exit(1);
 	}
 }
 
-static void
-opt_help(std::string const &arg)
+void
+opt_help(string const &arg)
 {
-	std::cout << program_name
-	          << " [-n amount]"
-	          << std::endl;
+	cout << program_name
+	     << " [-n amount]"
+	     << endl;
 	exit(0);
+}
+
+void
+print_explanation()
+{
+	cerr << "Esta prueba crea dos vectores de "
+	     << vectorSize
+	     << " números complejos pseudo-aleatorios"
+	     << "(la cantidad de elementos puede ser cambiada llamando "
+	     << program_name
+	     << " -n <cantidad>): uno de ellos usando la "
+	     << "clase std::complex y el otro usando la clase Complex "  
+	     << "diseñada para el TP."
+	     << endl
+	     << "El programa aplica las diversas funciones asociadas "
+	     << "a la clase a cada número y compara lo obtenido "
+	     << "con lo obtenido del llamado de las funciones análogas"
+	     << " asociadas a la clase std::complex."
+	     << endl;
 }
 
 // Definidos ad hoc para estas pruebas:
 //
 template <typename T> inline bool
-operator==(std::complex <T> const & std, Complex <T> const & own)
+operator==(complex <T> const & std, Complex <T> const & own)
 {
-	// la conversión está pues necesita usar la comparación con tolerancia,
-	// definida como Complex::operator==()
+	// La conversión está pues necesita usar la comparación con tolerancia,
+	// la cual está definida como Complex::operator==()
 	Complex <T> own_from_std(std.real(), std.imag());
 	return own == own_from_std;
 }
 
 template <typename T> inline bool
-operator==(Complex <T> const & own, std::complex <T> const & std)
+operator==(Complex <T> const & own, complex <T> const & std)
 {
 	Complex <T> own_from_std(std.real(), std.imag());
 	return own_from_std == own;
@@ -73,15 +106,15 @@ namespace {
 			for (size_t i = 0; i < vectorSize; ++i) {
 				long double randA = rand() * rand() * 10000;
 				long double randB = rand() * rand() * 10000;
-				stdComplex.push_back(std::complex <long double>(randA, randB));
+				stdComplex.push_back(complex <long double>(randA, randB));
 				myComplex.push_back(Complex <long double>(randA, randB));
 			}
 		}
-		std::vector <std::complex <long double> > stdComplex;
-		std::vector <Complex <long double> > myComplex;
+		vector <complex <long double> > stdComplex;
+		vector <Complex <long double> > myComplex;
 	};
 
-	// Probar que Complex::Complex() funcione correctamente
+	// Probar que Complex::Complex() haya funcionado correctamente
 	TEST_F(ComplexTest, Constructor) {
 		for (size_t i = 0; i < vectorSize; ++i)
 			EXPECT_EQ(stdComplex[i], myComplex[i]);
@@ -89,20 +122,17 @@ namespace {
 
 	// Probar que operator+() funcione
 	TEST_F(ComplexTest, Addition) {
-		for (size_t i = 0, j = vectorSize -1; i < vectorSize && j >= 0; ++i, --j)
-			EXPECT_EQ(stdComplex[i] + stdComplex[j], myComplex[i] + myComplex[j]);
+		TEST_BINARY_OP(operator+)
 	}
 
 	// Probar que operator-() funcione
 	TEST_F(ComplexTest, Substraction) {
-		for (size_t i = 0, j = vectorSize -1; i < vectorSize && j >= 0; ++i, --j)
-			EXPECT_EQ(stdComplex[i] - stdComplex[j], myComplex[i] - myComplex[j]);
+		TEST_BINARY_OP(operator-)
 	}
 
 	// Probar que operator*() funcione
 	TEST_F(ComplexTest, Multiplication) {
-		for (size_t i = 0, j = vectorSize -1; i < vectorSize && j >= 0; ++i, --j)
-			EXPECT_EQ(stdComplex[i] * stdComplex[j], myComplex[i] * myComplex[j]);
+		TEST_BINARY_OP(operator*)
 	}
 
 	// Probar que operator/() funcione
@@ -114,56 +144,45 @@ namespace {
 	}
 
 	// Probar que Complex::conj() funcione
-	TEST_F(ComplexTest, Conj) {
-		for (size_t i = 0; i < vectorSize; ++i)
-			EXPECT_EQ(std::conj(stdComplex[i]), myComplex[i].conj());
+	TEST_F(ComplexTest, Conjugate) {
+		TEST_UNARY_OP(conj)
 	}
 
 	// Probar que Complex::norm() funcione
 	TEST_F(ComplexTest, Norm) {
 		for (size_t i = 0; i < vectorSize; ++i)
-			EXPECT_DOUBLE_EQ(std::abs(stdComplex[i]), myComplex[i].norm());
+			EXPECT_DOUBLE_EQ(abs(stdComplex[i]), myComplex[i].norm());
 	}
 
 	// Probar que Complex::arg() funcione
-	TEST_F(ComplexTest, Arg) {
+	TEST_F(ComplexTest, Argument) {
 		for (size_t i = 0; i < vectorSize; ++i)
-			EXPECT_DOUBLE_EQ(std::arg(stdComplex[i]), myComplex[i].arg());
+			EXPECT_DOUBLE_EQ(arg(stdComplex[i]), myComplex[i].arg());
 	}
 
 	// Probar que exp() funcione
-	TEST_F(ComplexTest, Exp) {
+	TEST_F(ComplexTest, Exponential) {
 		for (size_t i = 0; i < vectorSize; ++i)
-			EXPECT_EQ(std::exp(stdComplex[i]), exp(myComplex[i]));
+			EXPECT_EQ(exp(stdComplex[i]), exp(myComplex[i]));
 	}
 
 	// Probar que la representación polar es el mismo número
 	TEST_F(ComplexTest, Polar) {
 		for (size_t i = 0; i < vectorSize; ++i)
 			EXPECT_EQ(myComplex[i], Complex<long double>(myComplex[i].norm())
-			          * exp(I * Complex<long double>(myComplex[i].arg())));
+			          * exp(I * myComplex[i].arg()));
 	}
 }  // namespace
 
-int main(int argc, char **argv) {
+int
+main(int argc, char **argv)
+{
 	program_name = argv[0];
+
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv);
 
-	std::cerr << "Esta prueba crea dos vectores de "
-	          << vectorSize
-	          << " números complejos pseudo-aleatorios"
-	          << "(la cantidad de elementos puede ser cambiada llamando "
-	          << program_name
-	          << " -n <cantidad>): uno de ellos usando la "
-	          << "clase std::complex y el otro usando la clase Complex "  
-	          << "diseñada para el TP."
-	          << std::endl
-	          << "El programa aplica las diversas funciones asociadas "
-	          << "a la clase a cada número y compara lo obtenido "
-	          << "con lo obtenido del llamado de las funciones análogas"
-	          << " asociadas a la clase std::complex."
-		       << std::endl;
+	print_explanation();
 
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
