@@ -6,31 +6,31 @@
 using namespace std;
 
 
-Process::Process(Configuration const& config)  : conf(config) {
-	validate_settings();
-}
-
-void Process::validate_settings() {
-	if (!conf.input || !conf.input->good()) {
+bool Process::validate_settings() {
+	if (!_input || !_input->good()) {
 		cerr << "Could not open input file." << endl;
-		settingsAreValid = false;
+		return false;
 	}
-	if (!conf.output || !conf.output->good()) {
+	if (!_output || !_output->good()) {
 		cerr << "Could not open output file." << endl;
-		settingsAreValid = false;
+		return false;
 	}
-	if (conf.regression && !conf.regression->good()) {
+	if (_regression && !_regression->good()) {
 		cerr << "Could not open regression file." << endl;
-		settingsAreValid = false;
+		return false;
 	}
-	conf.output->setf(ios::fixed, ios::floatfield);
-	conf.output->precision(6);
-	settingsAreValid = true;
+	if (!_transform) {
+		cerr << "Could not set transform file." << endl;
+		return false;
+	}
+	_output->setf(ios::fixed, ios::floatfield);
+	_output->precision(6);
+	return true;
 }
 
 bool
 Process::run() {
-	if (!settingsAreValid)
+	if (!validate_settings())
 		return false;
 
 	ComplexVector inSignal;
@@ -39,9 +39,9 @@ Process::run() {
 	string s;
 	bool status;
 
-	for (int lineNo = 1; getline(*conf.input, s); ++lineNo) {
+	for (int lineNo = 1; getline(*_input, s); ++lineNo) {
 		
-		if (conf.input->bad()) {
+		if (_input->bad()) {
 			cerr << "An error occured while processing line "
 			     << lineNo
 			     << "."
@@ -64,7 +64,7 @@ Process::run() {
 			return false;
 		}
 
-		status = conf.transform->compute(inSignal, outSignal);
+		status = _transform->compute(inSignal, outSignal);
 		
 		if (!status) {
 			cerr << "An error occured while performing the requested operation."
@@ -72,7 +72,7 @@ Process::run() {
 			return false;
 		}
 		
-		status = print_signal(*conf.output, outSignal);
+		status = print_signal(*_output, outSignal);
 		
 		if (!status) {
 			cerr << "Cannot write to output stream."
@@ -88,11 +88,11 @@ Process::run() {
 	return true;
 }
 
-Process::Configuration::~Configuration() {
-	if (input != &cin)
-		delete input;
-	if (output != &cout)
-		delete output;
-	delete regression;
-	delete transform;
+Process::~Process() {
+	if (_input != &cin)
+		delete _input;
+	if (_output != &cout)
+		delete _output;
+	delete _regression;
+	delete _transform;
 }

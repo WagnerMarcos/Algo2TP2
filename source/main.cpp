@@ -24,13 +24,13 @@ static char *program_name;
 // cmdline configurarán sus campos acorde
 // a lo leído por línea de comandos.
 // 
-static Process::Configuration config;
+static Process process;
 
 static void
 opt_input(string const &arg)
 {
 	if (arg != "-") {
-		config.input = new ifstream(arg.c_str(), ios::in);
+		process.input(new ifstream(arg.c_str(), ios::in));
 	}
 }
 
@@ -38,7 +38,7 @@ static void
 opt_output(string const &arg)
 {
 	if (arg != "-") {
-		config.output = new ofstream(arg.c_str(), ios::out);
+		process.output(new ofstream(arg.c_str(), ios::out));
 	}
 }
 
@@ -46,7 +46,7 @@ static void
 opt_regression(string const &arg)
 {
 	if(arg != "-") {
-		config.regression = new ifstream(arg.c_str(), ios::in);
+		process.regression(new ifstream(arg.c_str(), ios::in));
 	}
 }
 
@@ -58,7 +58,7 @@ opt_error(string const &arg)
 		char * nextChar;
 		read_value = strtold(arg.c_str(), &nextChar);
 		if (!nextChar || *nextChar != '\n') { // si fue válido
-			config.errorTreshold = read_value;
+			process.error_treshold(read_value);
 		}
 	}
 }
@@ -84,7 +84,7 @@ opt_method(string const &arg)
 		     << endl;
 		opt_help();
 	}
-	config.transform = new FourierTransform(chosen_method);
+	process.transform(new FourierTransform(chosen_method));
 }
 
 static void
@@ -117,8 +117,6 @@ main(int argc, char * const argv[])
 
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv);
-
-	Process process(config);
 
 	bool status;
 	status = process.run();
