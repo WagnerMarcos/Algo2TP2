@@ -18,15 +18,12 @@ static option_t options[] = {
 };
 
 static char *program_name;
-static Configuration config;
+static Process::Configuration config;
 
 static void
 opt_input(string const &arg)
 {
-	if (arg == "-") {
-		config.input = &cin;
-	}
-	else {
+	if (arg != "-") {
 		config.input = new ifstream(arg.c_str(), ios::in);
 	}
 }
@@ -34,10 +31,7 @@ opt_input(string const &arg)
 static void
 opt_output(string const &arg)
 {
-	if (arg == "-") {
-		config.output = &cout;
-	}
-	else {
+	if (arg != "-") {
 		config.output = new ofstream(arg.c_str(), ios::out);
 	}
 }
@@ -45,10 +39,7 @@ opt_output(string const &arg)
 static void
 opt_regression(string const &arg)
 {
-	if(arg == "-") {
-		config.regression = nullptr;
-	} 
-	else {
+	if(arg != "-") {
 		config.regression = new ifstream(arg.c_str(), ios::in);
 	}
 }
@@ -56,14 +47,14 @@ opt_regression(string const &arg)
 static void
 opt_error(string const &arg)
 {
-	if(arg == "-" ) {
-		char * p;
-		config.errorTreshold = strtold(arg.c_str(), &p);
-		if (*p && *p == '\n') { // si fue válido
-			return;
+	if(arg != "-" ) {
+		long double read_value;
+		char * nextChar;
+		read_value = strtold(arg.c_str(), &nextChar);
+		if (!nextChar || *nextChar != '\n') { // si fue válido
+			config.errorTreshold = read_value;
 		}
 	}
-	config.errorTreshold = DEFAULT_ERROR_TRESHOLD;
 }
 
 static void
@@ -117,6 +108,7 @@ int
 main(int argc, char * const argv[])
 {
 	program_name = argv[0];
+
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv);
 

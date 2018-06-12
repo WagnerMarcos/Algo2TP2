@@ -5,32 +5,34 @@
 
 using namespace std;
 
-Configuration::~Configuration() {
-	if (input != &cin)
-		delete input;
-	if (output != &cout)
-		delete output;
-	delete regression;
-	delete transform;
-}
 
 Process::Process(Configuration const& config)  : conf(config) {
-	configurate();
+	validate_settings();
 }
 
-void Process::configurate() {
-	if (!conf.input || !conf.input->good())
+void Process::validate_settings() {
+	if (!conf.input || !conf.input->good()) {
 		cerr << "Could not open input file." << endl;
-	if (!conf.output || !conf.output->good())
+		settingsAreValid = false;
+	}
+	if (!conf.output || !conf.output->good()) {
 		cerr << "Could not open output file." << endl;
-	if (conf.regression && !conf.regression->good())
+		settingsAreValid = false;
+	}
+	if (conf.regression && !conf.regression->good()) {
 		cerr << "Could not open regression file." << endl;
+		settingsAreValid = false;
+	}
 	conf.output->setf(ios::fixed, ios::floatfield);
 	conf.output->precision(6);
+	settingsAreValid = true;
 }
 
 bool
 Process::run() {
+	if (!settingsAreValid)
+		return false;
+
 	ComplexVector inSignal;
 	ComplexVector outSignal;
 	istringstream line;
@@ -84,4 +86,13 @@ Process::run() {
 		outSignal.clear();
 	}
 	return true;
+}
+
+Process::Configuration::~Configuration() {
+	if (input != &cin)
+		delete input;
+	if (output != &cout)
+		delete output;
+	delete regression;
+	delete transform;
 }

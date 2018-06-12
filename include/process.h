@@ -6,23 +6,22 @@
 #include "Complex.h"
 #include "io.h"
 
-#define DEFAULT_ERROR_TRESHOLD 1e-3
-
-struct Configuration {
-	std::istream* input;
-	std::ostream* output;
-	std::istream* regression;
-	FourierTransform* transform;
-	long double errorTreshold;
-	~Configuration();
-};
-
 class Process {
-	Configuration const& conf;
-	void configurate();
 public:
+	struct Configuration {
+		std::istream* input = &std::cin;
+		std::ostream* output = &std::cout;
+		std::istream* regression = nullptr;
+		FourierTransform* transform = nullptr;
+		long double errorTreshold = 1e-3;
+		~Configuration();
+	};
 	Process(Configuration const& config);
 	bool run();
+private:
+	Configuration const& conf;
+	void validate_settings();
+	bool settingsAreValid;
 };
 
 #endif // _PROCESS_H_INCLUDED_
