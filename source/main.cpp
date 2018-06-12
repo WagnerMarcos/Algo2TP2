@@ -18,6 +18,12 @@ static option_t options[] = {
 };
 
 static char *program_name;
+
+// Estructura de configuración del proceso.
+// las distintas funciones llamadas por
+// cmdline configurarán sus campos acorde
+// a lo leído por línea de comandos.
+// 
 static Process::Configuration config;
 
 static void

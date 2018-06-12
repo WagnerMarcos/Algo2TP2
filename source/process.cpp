@@ -81,7 +81,7 @@ Process::run() {
 		}
 
 		// vacía los vectores para reutilizarlos en el siguiente ciclo. 
-
+		//
 		inSignal.clear();
 		outSignal.clear();
 	}
