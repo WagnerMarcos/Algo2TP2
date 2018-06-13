@@ -16,8 +16,7 @@ class Complex {
 	T y;
 	static T acceptableDelta;
 public:
-	Complex() : x{}, y{} {}
-	Complex(T real, T imag = 0) : x(real), y(imag) {}
+	Complex(T real = 0, T imag = 0) : x(real), y(imag) {}
 	Complex(const Complex& C) : x(C.x), y(C.y) {}
 	~Complex() {}
 

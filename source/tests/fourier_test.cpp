@@ -108,6 +108,38 @@ opt_help(std::string const & arg)
 	exit(0);
 }
 
+static void
+print_explanation()
+{
+	cout << "En la primera prueba se crea un vector de "
+	     << vectorSize
+	     << " números complejos pseudo-aleatorios "
+	     << "(la cantidad de elementos puede ser cambiada llamando "
+	     << program_name
+	     << " -n <cantidad>). "
+	     << endl
+	     << "Luego se le aplica la transformada elegida "
+	     << "(por defecto se usan la FFT e IFFT; "
+	     << "la transformada a utilizar puede  ser cambiada llamando "
+	     << program_name
+	     << " -m <fast|discrete>), y al vector resultante se le aplica "
+	     << "la antitransformada."
+	     << endl
+	     << "Por último, se comprueba que el vector original y "
+	     << "la antitransformada de su transformada sean iguales."
+	     << endl;
+
+	cout << "En la segunda prueba se lee vectores y sus transformadas "
+	     << "de archivos y luego se los compara a los valores obtenidos "
+	     << "al aplicarles la transformada elegida."
+	     << endl
+	     << "Se considera que dos números son iguales si "
+	     << "el módulo de su diferencia es menor o igual a "
+	     << Complex<long double>::acceptable_delta()
+	     << "."
+	     << endl;
+}
+
 // Google Test exige que las pruebas estén en un namespace sin nombre
 //
 namespace {
@@ -184,7 +216,9 @@ namespace {
 
 }  // namespace
 
-int main(int argc, char **argv) {
+int
+main(int argc, char **argv)
+{
 	program_name = argv[0];
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv);
@@ -193,37 +227,11 @@ int main(int argc, char **argv) {
 
 	::testing::InitGoogleTest(&argc, argv);
 
-	cout << "En la primera prueba se crea un vector de "
-	     << vectorSize
-	     << " números complejos pseudo-aleatorios "
-	     << "(la cantidad de elementos puede ser cambiada llamando "
-	     << program_name
-	     << " -n <cantidad>). "
-	     << endl
-	     << "Luego se le aplica la transformada elegida "
-	     << "(por defecto se usan la FFT e IFFT; "
-	     << "la transformada a utilizar puede  ser cambiada llamando "
-	     << program_name
-	     << " -m <fast|discrete>), y al vector resultante se le aplica "
-	     << "la antitransformada."
-	     << endl
-	     << "Por último, se comprueba que el vector original y "
-	     << "la antitransformada de su transformada sean iguales."
-	     << endl;
-
-	cout << "En la segunda prueba se lee vectores y sus transformadas "
-	     << "de archivos y luego se los compara a los valores obtenidos "
-	     << "al aplicarles la transformada elegida."
-	     << endl
-	     << "Se considera que dos números son iguales si "
-	     << "el módulo de su diferencia es menor o igual a "
-	     << Complex<long double>::acceptable_delta()
-	     << "."
-	     << endl;
-	
 	ft = new FourierTransform(chosen_method);
 	ift = new FourierTransform(chosen_inverse_method);
 	
+	print_explanation();
+
 	test_result = RUN_ALL_TESTS();
 	
 	delete ft;
