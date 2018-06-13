@@ -1,7 +1,3 @@
-// cmdline - procesamiento de opciones en la l�nea de comando.
-//
-// $Date: 2012/09/14 13:08:33 $
-//
 #include <string>
 #include <cstdlib>
 #include <iostream>
@@ -16,19 +12,6 @@ cmdline::cmdline()
 
 cmdline::cmdline(option_t *table) : option_table(table)
 {
-	/* 
-	- Lo mismo que hacer:
-
-	option_table = table;
-
-	Siendo "option_table" un atributo de la clase cmdline
-	y table un puntero a objeto o struct de "option_t".
-	
-	Se estar�a contruyendo una instancia de la clase cmdline
-	cargandole los datos que se hayan en table (la table con
-	las opciones, ver el c�digo en main.cc)
-
-	*/
 }
 
 void
@@ -103,10 +86,6 @@ cmdline::do_long_opt(const char *opt, const char *arg)
 	     << "."
 	     << endl;
 	exit(1);
-	// Algunos compiladores se quejan con funciones que 
-	// l�gicamente no pueden terminar, y que no devuelven
-	// un valor en esta �ltima parte.
-	//
 	return -1;
 }
 
@@ -139,9 +118,5 @@ cmdline::do_short_opt(const char *opt, const char *arg)
 	     << "."
 	     << endl;
 	exit(1);
-	// Algunos compiladores se quejan con funciones que 
-	// l�gicamente no pueden terminar, y que no devuelven
-	// un valor en esta �ltima parte.
-	//
 	return -1;
 }

@@ -18,68 +18,35 @@ static option_t options[] = {
 };
 
 static char *program_name;
-static FourierTransform *transform;
-static istream *iss;
-static ostream *oss;
-static ifstream *rfs;
-static fstream ifs;
-static fstream ofs;
 
+// Estructura de configuración del proceso.
+// las distintas funciones llamadas por
+// cmdline configurarán sus campos acorde
+// a lo leído por línea de comandos.
+// 
+static Process process;
 
 static void
 opt_input(string const &arg)
 {
-	if (arg == "-") {
-		iss = &cin;
-	}
-	else {
-		ifs.open(arg.c_str(), ios::in);
-		iss = &ifs;
-	}
-
-	if (!iss->good()) {
-		cerr << "Cannot open "
-		     << arg
-		     << "."
-		     << endl;
-		exit(1);
+	if (arg != "-") {
+		process.input(new ifstream(arg.c_str(), ios::in));
 	}
 }
 
 static void
 opt_output(string const &arg)
 {
-	if (arg == "-") {
-		oss = &cout;
-	} else {
-		ofs.open(arg.c_str(), ios::out);
-		oss = &ofs;
-	}
-
-	if (!oss->good()) {
-		cerr << "Cannot open "
-		     << arg
-		     << "."
-		     << endl;
-		exit(1);
+	if (arg != "-") {
+		process.output(new ofstream(arg.c_str(), ios::out));
 	}
 }
 
 static void
 opt_regression(string const &arg)
 {
-	if(arg == "-") {
-		rfs = nullptr;
-		return;
-	} 
-	
-	rfs->open(arg.c_str(), ios::in);
-	if (!rfs->good()) {
-		cerr << "Cannot open "
-		     << arg
-		     << "."
-		     << endl;
-		exit(1);
+	if(arg != "-") {
+		process.regression(new ifstream(arg.c_str(), ios::in));
 	}
 }
 
@@ -87,13 +54,13 @@ static void
 opt_error(string const &arg)
 {
 	if(arg != "-" ) {
-		Complex<long double>::acceptable_delta(
-			strtold(arg.c_str(),nullptr)
-		);
+		long double read_value;
+		char * nextChar;
+		read_value = strtold(arg.c_str(), &nextChar);
+		if (!nextChar || *nextChar != '\n') { // si fue válido
+			process.error_treshold(read_value);
+		}
 	}
-
-	//Si no ponen valor a error, ya tiene su valor por defecto.
-
 }
 
 static void
@@ -106,10 +73,9 @@ opt_method(string const &arg)
 	if (!(iss >> read_method) || iss.bad()) {
 		cerr << "Cannot read method."
 		     << endl;
-		exit(1);
 	}
 
-	chosen_method = choose_method( read_method );
+	chosen_method = choose_method(read_method);
 
 	if (chosen_method == nullptr) {
 		cerr << "Not a posible method: "
@@ -117,9 +83,8 @@ opt_method(string const &arg)
 		     << "."
 		     << endl;
 		opt_help();
-		exit(1);
 	}
-	::transform = new FourierTransform(chosen_method);
+	process.transform(new FourierTransform(chosen_method));
 }
 
 static void
@@ -129,7 +94,6 @@ opt_help(string const & arg)
 	     << program_name
 	     << " [-m FFT | IFFT | DFT | IDFT] [-i file] [-o file]"
 	     << endl;
-	exit(0);
 }
 
 FourierAlgorithm *
@@ -150,19 +114,12 @@ int
 main(int argc, char * const argv[])
 {
 	program_name = argv[0];
+
 	cmdline cmdl(options);
 	cmdl.parse(argc, argv);
 
-	// Cuestiones de formato para la impresión:
-	oss->setf(ios::fixed, ios::floatfield);
-	oss->precision(6);
+	bool status;
+	status = process.run();
 
-	bool status = process(*::transform, *iss, *oss);
-/*
-	status = regression(*::transform, *oss, rfs);
-*/
-	delete ::transform;
-	::transform = nullptr;
-
-	return status;
+	return !status;
 }

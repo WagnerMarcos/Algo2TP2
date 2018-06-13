@@ -7,7 +7,6 @@
 
 bool load_signal(std::istream &, Vector<Complex<> > &);
 bool print_signal(std::ostream &, Vector<Complex<> > const &);
-void print_msg_and_exit(std::string const & msg);
-bool process(FourierTransform& transform, std::istream& is, std::ostream& os);
+void print_error_on_line(std::string line, size_t line_number);
 
 #endif	//_IO_H_INCLUDED_
