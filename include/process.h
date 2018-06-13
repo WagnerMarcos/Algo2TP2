@@ -16,7 +16,7 @@ public:
 	// son inválidos.
 	//
 	bool run();
-	
+
 	// Getters
 	//
 	std::istream* input() { return  _input; }
@@ -55,6 +55,12 @@ private:
 	FourierTransform* _transform = nullptr;
 	long double _errorTreshold = 1e-3;
 	bool validate_settings();
+	// Función que calcula el error relativo
+	// entre lo transformado y el archivo
+	// de regresiones.
+	//
+	long double relative_error(ComplexVector const&, ComplexVector const&);
+
 };
 
 #endif // _PROCESS_H_INCLUDED_

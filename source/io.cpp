@@ -27,3 +27,14 @@ print_signal(ostream & os, Vector<Complex<> > const & output)
 		return false;
 	return true;
 }
+
+void
+print_error_on_line(string line, size_t line_number)
+{
+	cerr << "Error processing \""
+	     << line
+	     << "\" (line "
+	     << line_number
+	     << ")."
+	     << endl;
+}
