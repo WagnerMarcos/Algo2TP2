@@ -18,6 +18,9 @@ public:
 	virtual ~FourierTransform() {
 		delete _method;
 	}
+	FourierTransform() = delete;
+	FourierTransform(FourierTransform const&) = delete;
+	FourierTransform& operator=(FourierTransform const&) = delete;
 	bool compute(ComplexVector const & input, ComplexVector & output) {
 		return _method? _method->compute(input, output) : false;
 	}

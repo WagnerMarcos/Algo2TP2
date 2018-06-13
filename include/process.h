@@ -8,6 +8,9 @@
 
 class Process {
 public:
+	Process() = default;
+	Process(Process const&) = delete;
+	Process& operator=(Process const&) = delete;
 	~Process();
 	// Función que procesa los datos
 	// según lo que haya sido configurado.
