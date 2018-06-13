@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 bool
 Process::validate_settings()
 {
@@ -40,43 +39,48 @@ Process::run()
 	if (!validate_settings())
 		return false;
 
-	ComplexVector inSignal;
-	ComplexVector outSignal;
-	ComplexVector regSignal;
-	istringstream line;
 	string s;
 	bool status;
 	long double error;
 
 	for (int lineNo = 1; getline(*_input, s); ++lineNo) {
+		ComplexVector inSignal;
+		ComplexVector outSignal;
+		ComplexVector regSignal;
+		istringstream line;
 		
 		if (_input->bad()) {
 			print_error_on_line(line.str(), lineNo);
 			return false;
 		}
-		
 		line.str(s);
 		line.clear(); // vacía los flags del istringstream
-		
 		status = load_signal(line, inSignal);
-		
 		if (!status) {
 			print_error_on_line(line.str(), lineNo);
 			return false;
 		}
-		
 		outSignal.reserve(inSignal.size());
 		status = _transform->compute(inSignal, outSignal);
-		
 		if (!status) {
 			print_error_on_line(line.str(), lineNo);
 			return false;
 		}
-
 		// si hay que procesar el archivo de regresiones
 		if (_regression) {
+			getline(*_regression, s);
+			if (_input->bad()) {
+				print_error_on_line(line.str(), lineNo);
+				return false;
+			}
+			line.str(s);
+			line.clear();
 			regSignal.reserve(outSignal.size());
-			status = load_signal(*_regression, regSignal);
+			status = load_signal(line, regSignal);
+			if (!status) {
+				print_error_on_line(line.str(), lineNo);
+				return false;
+			}
 			error = relative_error(outSignal, regSignal);
 			cout << "test "
 			     << lineNo
@@ -103,7 +107,6 @@ Process::run()
 			     << endl;
 			return false;
 		}
-
 		// vacía los vectores para reutilizarlos en el siguiente ciclo. 
 		//
 		inSignal.clear();
@@ -126,12 +129,12 @@ Process::~Process()
 long double
 Process::relative_error(ComplexVector const& result, ComplexVector const& regression)
 {
-	Complex<long double> aux = 0;
-	long double regNorm = 0;
-	for(size_t i=0; i < result.size(); ++i) {
-		aux += result[i] - regression[i];
-		regNorm += regression[i].norm();
+	long double outputSquaredNormSum = 0;
+	long double regSquaredNormSum = 0;
+	for(size_t i = 0; i < result.size(); ++i) {
+		outputSquaredNormSum += ((result[i] - regression[i]).norm() * (result[i] - regression[i]).norm());
+		regSquaredNormSum += (regression[i].norm() * regression[i].norm());
 	}
-	return sqrt(aux.norm() * aux.norm() / (regNorm * regNorm));
+	return sqrt( outputSquaredNormSum / regSquaredNormSum);
 }
 
