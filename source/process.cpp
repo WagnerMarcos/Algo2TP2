@@ -27,10 +27,10 @@ Process::validate_settings()
 		cerr << "Could not set transform file." << endl;
 		return false;
 	}
-
+/*
 	_output->setf(ios::fixed, ios::floatfield);
 	_output->precision(6);
-
+*/
 	return true;
 }
 
@@ -87,11 +87,10 @@ Process::run()
 			else {
 				cout << "error";
 			}
-
 			cout << " "
 			     << outSignal.size()
 			     << " "
-			     << ios::scientific
+			     << std::scientific
 			     << error
 			     << endl;
 		}
@@ -127,13 +126,12 @@ Process::~Process()
 long double
 Process::relative_error(ComplexVector const& result, ComplexVector const& regression)
 {
-	long double aux = 0;
+	Complex<long double> aux = 0;
 	long double regNorm = 0;
 	for(size_t i=0; i < result.size(); ++i) {
-		aux = (result[i] - regression[i]).norm();
-		aux *= aux; 
+		aux += result[i] - regression[i];
 		regNorm += regression[i].norm();
 	}
-	return sqrt(aux / (regNorm * regNorm));
+	return sqrt(aux.norm() * aux.norm() / (regNorm * regNorm));
 }
 
