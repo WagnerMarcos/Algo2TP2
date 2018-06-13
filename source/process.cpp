@@ -100,12 +100,11 @@ Process::run()
 		}
 		else { // si no, imprimir la señal.
 			status = print_signal(*_output, outSignal);
-		}
-
-		if (!status) {
-			cerr << "Cannot write to output stream."
-			     << endl;
-			return false;
+			if (!status) {
+				cerr << "Cannot write to output stream."
+				     << endl;
+				return false;
+			}
 		}
 		// vacía los vectores para reutilizarlos en el siguiente ciclo. 
 		//
@@ -113,7 +112,7 @@ Process::run()
 		outSignal.clear();
 		regSignal.clear();
 	}
-	return true;
+	return status;
 }
 
 Process::~Process()

@@ -20,11 +20,11 @@ struct option_t {
 class cmdline {
 	option_t *option_table;
 	cmdline();
-	int do_long_opt(const char *, const char *);
-	int do_short_opt(const char *, const char *);
+	int do_long_opt(const char *, const char *) const;
+	int do_short_opt(const char *, const char *) const;
 public:
-	cmdline(option_t *);
-	void parse(int, char * const []);
+	explicit cmdline(option_t *);
+	void parse(int, char * const []) const;
 };
 
 #endif

@@ -14,7 +14,7 @@ public:
 
 class FourierTransform {
 public:
-	FourierTransform(FourierAlgorithm *method) : _method(method) {}
+	explicit FourierTransform(FourierAlgorithm *method) : _method(method) {}
 	virtual ~FourierTransform() {
 		delete _method;
 	}

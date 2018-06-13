@@ -19,11 +19,11 @@ public:
 
 	// Getters
 	//
-	std::istream* input() { return  _input; }
-	std::ostream* output() { return _output; }
-	std::istream* regression() { return _regression; }
-	FourierTransform* transform() { return _transform; }
-	double error_treshold() { return _errorTreshold; }
+	std::istream* input() const { return  _input; }
+	std::ostream* output() const { return _output; }
+	std::istream* regression() const { return _regression; }
+	FourierTransform* transform() const { return _transform; }
+	long double error_treshold() const { return _errorTreshold; }
 
 	// Setters
 	//
@@ -43,7 +43,7 @@ public:
 		_transform = t;
 		return _transform;
 	}
-	double error_treshold(double treshold) {
+	long double error_treshold(double treshold) {
 		_errorTreshold = treshold;
 		return _errorTreshold;
 	}

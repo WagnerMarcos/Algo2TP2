@@ -15,7 +15,7 @@ cmdline::cmdline(option_t *table) : option_table(table)
 }
 
 void
-cmdline::parse(int argc, char * const argv[])
+cmdline::parse(int argc, char * const argv[]) const
 {
 #define END_OF_OPTIONS(p)       \
 	((p)->short_name == 0   \
@@ -58,7 +58,7 @@ cmdline::parse(int argc, char * const argv[])
 }
 
 int
-cmdline::do_long_opt(const char *opt, const char *arg)
+cmdline::do_long_opt(const char *opt, const char *arg) const
 {
 	for (option_t *op = option_table; op->long_name != 0; ++op) {
 		if (string(opt) == string(op->long_name)) {
@@ -90,7 +90,7 @@ cmdline::do_long_opt(const char *opt, const char *arg)
 }
 
 int
-cmdline::do_short_opt(const char *opt, const char *arg)
+cmdline::do_short_opt(const char *opt, const char *arg) const
 {
 	option_t *op;
 	for (op = option_table; op->short_name != 0; ++op) {
