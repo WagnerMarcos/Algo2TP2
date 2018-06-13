@@ -10,8 +10,9 @@
 #define DEFAULT_AMOUNT "5000"
 #define DEFAULT_METHOD "fast"
 
-static void opt_number(std::string const & arg);
-static void opt_method(std::string const & arg);
-static void opt_help(std::string const & arg = "");
+static void opt_number(std::string const &);
+static void opt_method(std::string const &);
+static void opt_error(std::string const &);
+static void opt_help(std::string const & = "");
 
 #endif // _FOURIER_TEST_H_INCLUDED_

@@ -53,31 +53,32 @@ static const string test_files[file_amount] = {
 static option_t options[] = {
 	{1, "n", "number", DEFAULT_AMOUNT, opt_number, OPT_DEFAULT},
 	{1, "m", "method", DEFAULT_METHOD, opt_method, OPT_DEFAULT},
+	{1, "e", "error", "1e-3", opt_error, OPT_DEFAULT},
 	{0, "h", "help", nullptr, opt_help, OPT_DEFAULT},
 	{0, nullptr, nullptr, nullptr, nullptr, 0}
 };
 
 static void
-opt_number(std::string const & arg)
+opt_number(string const & arg)
 {
-	std::istringstream iss(arg);
+	istringstream iss(arg);
 
 	if (!(iss >> vectorSize) || !iss.eof()) {
-		std::cerr << "Not a possible amount: "
+		cerr << "Not a possible amount: "
 		     << arg
 		     << "."
-		     << std::endl;
+		     << endl;
 		exit(1);
 	}
 	if (iss.bad()) {
-		std::cerr << "Cannot read amount."
-		          << std::endl;
+		cerr << "Cannot read amount."
+		          << endl;
 		exit(1);
 	}
 }
 
 static void
-opt_method(std::string const & arg)
+opt_method(string const & arg)
 {
 	if (arg == "fast") {
 		chosen_method = new FFT;
@@ -88,30 +89,43 @@ opt_method(std::string const & arg)
 		chosen_inverse_method = new IDFT;
 	}
 	else {
-		std::cerr << "Not a possible method: "
-		          << arg
-		          << "."
-		          << std::endl;
+		cerr << "Not a possible method: "
+		     << arg
+		     << "."
+		     << endl;
 		opt_help();
 		exit(1);
 	}
 }
 
 static void
-opt_help(std::string const &)
+opt_error(string const &arg)
 {
-	std::cout << "Usage: "
-	          << program_name
-	          << " [-n amount]"
-	          << " [-m fast | discrete]"
-	          << std::endl;
+	if(arg != "-" ) {
+		char * nextChar;
+		long double read_value = strtold(arg.c_str(), &nextChar);
+		if (!nextChar || *nextChar != '\n') { // si fue válido
+			Complex<>::acceptable_delta(read_value);
+		}
+	}
+}
+
+static void
+opt_help(string const &)
+{
+	cout << "Usage: "
+	     << program_name
+	     << " [-n amount]"
+	     << " [-m fast | discrete]"
+	     << endl;
 	exit(0);
 }
 
 static void
 print_explanation()
 {
-	cout << "En la primera prueba se crea un vector de "
+	cout << endl
+	     << "En la primera prueba se crea un vector de "
 	     << vectorSize
 	     << " números complejos pseudo-aleatorios "
 	     << "(la cantidad de elementos puede ser cambiada llamando "
@@ -136,7 +150,9 @@ print_explanation()
 	     << "Se considera que dos números son iguales si "
 	     << "el módulo de su diferencia es menor o igual a "
 	     << Complex<long double>::acceptable_delta()
-	     << "."
+	     << "(este valor puede cambiarse llamando "
+	     << program_name
+	     << " -e <valor>)."
 	     << endl;
 }
 
@@ -227,10 +243,10 @@ main(int argc, char **argv)
 
 	::testing::InitGoogleTest(&argc, argv);
 
+	print_explanation();
+
 	ft = new FourierTransform(chosen_method);
 	ift = new FourierTransform(chosen_inverse_method);
-	
-	print_explanation();
 
 	test_result = RUN_ALL_TESTS();
 	

@@ -25,7 +25,7 @@ public:
 	std::istream* input() const { return  _input; }
 	std::ostream* output() const { return _output; }
 	std::istream* regression() const { return _regression; }
-	FourierTransform* transform() const { return _transform; }
+	const FourierTransform* transform() const { return _transform; }
 	long double error_treshold() const { return _errorTreshold; }
 
 	// Setters

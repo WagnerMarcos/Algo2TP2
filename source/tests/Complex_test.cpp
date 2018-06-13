@@ -61,7 +61,8 @@ opt_help(string const &)
 void
 print_explanation()
 {
-	cerr << "Esta prueba crea dos vectores de "
+	cerr << endl
+	     << "Esta prueba crea dos vectores de "
 	     << vectorSize
 	     << " números complejos pseudo-aleatorios"
 	     << "(la cantidad de elementos puede ser cambiada llamando "

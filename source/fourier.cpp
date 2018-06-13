@@ -4,7 +4,7 @@
 #include "fourier.h"
 
 bool
-Discrete::compute(ComplexVector const & input, ComplexVector & output)
+Discrete::compute(ComplexVector const& input, ComplexVector & output) const
 {
 	size_t n = input.size();
 	output.reserve(n);
@@ -20,7 +20,7 @@ Discrete::compute(ComplexVector const & input, ComplexVector & output)
 }
 
 bool
-Fast::compute(ComplexVector const & input, ComplexVector & output)
+Fast::compute(ComplexVector const & input, ComplexVector & output) const
 {
 	output.clear();
 	size_t n = input.size();
@@ -43,7 +43,7 @@ Fast::compute(ComplexVector const & input, ComplexVector & output)
 }
 
 ComplexVector
-Fast::_compute(ComplexVector const & input)
+Fast::_compute(ComplexVector const & input) const
 {
 	size_t n = input.size();
 	if (n <= 1) {

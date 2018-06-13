@@ -130,7 +130,7 @@ public:
 };
 
 template <typename T>
-T Complex<T>::acceptableDelta = 10e-3;
+T Complex<T>::acceptableDelta = 10e-6;
 
 const Complex <long double> I(0, 1);
 
