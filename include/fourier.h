@@ -49,7 +49,7 @@ public:
 	bool compute(ComplexVector const & input, ComplexVector & output);
 protected:
 	virtual const Complex <> _coefficient(int const k, int const n) = 0;
-	virtual const size_t _divisor(size_t const n) = 0;
+	virtual size_t _divisor(size_t const n) = 0;
 private:
 	ComplexVector _compute(ComplexVector const & input);
 };
@@ -58,7 +58,7 @@ class FFT : public Fast {
 	const Complex <> _coefficient(int const k, int const n) override {
 		return exp(-I * 2.0 * M_PI * k / n);
 	}
-	const size_t _divisor(size_t const n) {
+	size_t _divisor(size_t const) {
 		return 1;
 	}
 };
@@ -67,7 +67,7 @@ class IFFT : public Fast {
 	const Complex <> _coefficient(int const k, int const n) override {
 		return exp(I * 2.0 * M_PI * k / n);
 	}
-	const size_t _divisor(size_t const n) {
+	size_t _divisor(size_t const n) {
 		return n;
 	}
 };

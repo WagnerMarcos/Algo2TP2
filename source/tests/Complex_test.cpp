@@ -8,12 +8,12 @@
 #include "Complex_test.h"
 
 #define TEST_UNARY_OP(OP) { \
-	for (size_t i = 0; i < vectorSize; ++i) \
+	for (int i = 0; i < vectorSize; ++i) \
 			EXPECT_EQ(OP(stdComplex[i]), myComplex[i].OP()); \
 }
 
 #define TEST_BINARY_OP(OP) { \
-		for (size_t i=0, j = vectorSize-1; i < vectorSize && j >= 0; ++i,--j) \
+		for (int i = 0, j = vectorSize-1; i < vectorSize && j >= 0; ++i,--j) \
 			EXPECT_EQ( \
 				OP(stdComplex[i], stdComplex[j]), \
 				myComplex[i].OP(myComplex[j]) \
@@ -22,12 +22,12 @@
 using namespace std;
 
 static char *program_name;
-static size_t vectorSize;
+static int vectorSize;
 
 static option_t options[] = {
 	{1, "n", "number", DEFAULT_AMOUNT, opt_number, OPT_DEFAULT},
 	{0, "h", "help", NULL, opt_help, OPT_DEFAULT},
-	{0, },
+	{0, nullptr, nullptr, nullptr, nullptr, 0}
 };
 
 void
@@ -50,7 +50,7 @@ opt_number(string const &arg)
 }
 
 void
-opt_help(string const &arg)
+opt_help(string const &)
 {
 	cout << program_name
 	     << " [-n amount]"
@@ -103,7 +103,7 @@ namespace {
 	protected:
 		ComplexTest() : stdComplex(vectorSize), myComplex(vectorSize) {
 			srand(time(NULL));
-			for (size_t i = 0; i < vectorSize; ++i) {
+			for (int i = 0; i < vectorSize; ++i) {
 				long double randA = rand() * rand() * 10000;
 				long double randB = rand() * rand() * 10000;
 				stdComplex.push_back(complex <long double>(randA, randB));
@@ -116,7 +116,7 @@ namespace {
 
 	// Probar que Complex::Complex() haya funcionado correctamente
 	TEST_F(ComplexTest, Constructor) {
-		for (size_t i = 0; i < vectorSize; ++i)
+		for (int i = 0; i < vectorSize; ++i)
 			EXPECT_EQ(stdComplex[i], myComplex[i]);
 	}
 
@@ -137,7 +137,7 @@ namespace {
 
 	// Probar que operator/() funcione
 	TEST_F(ComplexTest, Division) {
-		for (size_t i = 0, j = vectorSize-1; i < vectorSize && j >= 0; ++i, --j)
+		for (int i = 0, j = vectorSize-1; i < vectorSize && j >= 0; ++i, --j)
 			if(stdComplex[j] != 0.0l && myComplex[j] != 0.0l)
 				EXPECT_EQ(stdComplex[i] / stdComplex[j],
 				          myComplex[i] / myComplex[j]);
@@ -150,25 +150,25 @@ namespace {
 
 	// Probar que Complex::norm() funcione
 	TEST_F(ComplexTest, Norm) {
-		for (size_t i = 0; i < vectorSize; ++i)
+		for (int i = 0; i < vectorSize; ++i)
 			EXPECT_DOUBLE_EQ(abs(stdComplex[i]), myComplex[i].norm());
 	}
 
 	// Probar que Complex::arg() funcione
 	TEST_F(ComplexTest, Argument) {
-		for (size_t i = 0; i < vectorSize; ++i)
+		for (int i = 0; i < vectorSize; ++i)
 			EXPECT_DOUBLE_EQ(arg(stdComplex[i]), myComplex[i].arg());
 	}
 
 	// Probar que exp() funcione
 	TEST_F(ComplexTest, Exponential) {
-		for (size_t i = 0; i < vectorSize; ++i)
+		for (int i = 0; i < vectorSize; ++i)
 			EXPECT_EQ(exp(stdComplex[i]), exp(myComplex[i]));
 	}
 
 	// Probar que la representación polar es el mismo número
 	TEST_F(ComplexTest, Polar) {
-		for (size_t i = 0; i < vectorSize; ++i)
+		for (int i = 0; i < vectorSize; ++i)
 			EXPECT_EQ(myComplex[i], Complex<long double>(myComplex[i].norm())
 			          * exp(I * myComplex[i].arg()));
 	}

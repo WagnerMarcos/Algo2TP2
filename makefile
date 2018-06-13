@@ -1,4 +1,4 @@
-CXXFLAGS = -g -Wall -Wpedantic -Wdeprecated -std=c++17 -O3
+CXXFLAGS = -g -Wall -Wpedantic -Wdeprecated -Wextra -std=c++17 -O3
 SRC = source
 INCLUDE = include
 TESTS = source/tests

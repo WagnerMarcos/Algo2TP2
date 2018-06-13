@@ -53,8 +53,8 @@ static const string test_files[file_amount] = {
 static option_t options[] = {
 	{1, "n", "number", DEFAULT_AMOUNT, opt_number, OPT_DEFAULT},
 	{1, "m", "method", DEFAULT_METHOD, opt_method, OPT_DEFAULT},
-	{0, "h", "help", NULL, opt_help, OPT_DEFAULT},
-	{0, },
+	{0, "h", "help", nullptr, opt_help, OPT_DEFAULT},
+	{0, nullptr, nullptr, nullptr, nullptr, 0}
 };
 
 static void
@@ -98,7 +98,7 @@ opt_method(std::string const & arg)
 }
 
 static void
-opt_help(std::string const & arg)
+opt_help(std::string const &)
 {
 	std::cout << "Usage: "
 	          << program_name

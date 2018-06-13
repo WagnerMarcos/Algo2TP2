@@ -14,7 +14,7 @@ static option_t options[] = {
 	{1, "e", "error", "1e-3", opt_error, OPT_DEFAULT},
 	{1, "m", "method", "FFT", opt_method, OPT_DEFAULT},
 	{0, "h", "help", nullptr, opt_help, OPT_DEFAULT},
-	{0, },
+	{0, nullptr, nullptr, nullptr, nullptr, 0}
 };
 
 static char *program_name;
@@ -88,7 +88,7 @@ opt_method(string const &arg)
 }
 
 static void
-opt_help(string const & arg)
+opt_help(string const &)
 {
 	cout << "Usage: "
 	     << program_name

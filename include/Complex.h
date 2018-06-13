@@ -8,7 +8,7 @@
 
 // Función para la comparación con margen de error:
 template<typename T>
-inline const bool almostEqual(T a, T b);
+inline bool almostEqual(T a, T b);
 
 template <typename T = long double>
 class Complex {
@@ -137,7 +137,7 @@ const Complex <long double> I(0, 1);
 // Función para la comparación que comprueba si dos números difieren en lo
 // suficientemente poco.
 //
-template <typename T> inline const bool 
+template <typename T> inline bool 
 almostEqual(T a, T b)
 {
 	const T absA = std::abs(a);
