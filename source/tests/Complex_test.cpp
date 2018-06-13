@@ -75,7 +75,7 @@ print_explanation()
 	     << "a la clase a cada número y compara lo obtenido "
 	     << "con lo obtenido del llamado de las funciones análogas"
 	     << " asociadas a la clase std::complex."
-	     << endl;
+	     << endl << endl;
 }
 
 // Definidos ad hoc para estas pruebas:

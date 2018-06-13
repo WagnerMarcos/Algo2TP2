@@ -61,7 +61,7 @@ class FFT : public Fast {
 	Complex <> _coefficient(int k, int n) const override {
 		return exp(-I * 2.0 * M_PI * k / n);
 	}
-	size_t _divisor(size_t const) const {
+	size_t _divisor(size_t const) const override {
 		return 1;
 	}
 };
@@ -70,7 +70,7 @@ class IFFT : public Fast {
 	Complex <> _coefficient(int k, int n) const override {
 		return exp(I * 2.0 * M_PI * k / n);
 	}
-	size_t _divisor(size_t n) const {
+	size_t _divisor(size_t n) const override {
 		return n;
 	}
 };

@@ -158,7 +158,7 @@ almostEqual(T a, T b)
 template <typename T> Complex <T>
 exp(const Complex <T> & c)
 {
-	return typename Complex<T>::Complex( std::exp (c.re()) * std::cos(c.im()),
+	return Complex<T>( std::exp (c.re()) * std::cos(c.im()),
 	       std::exp(c.re()) * std::sin(c.im()));
 }
 

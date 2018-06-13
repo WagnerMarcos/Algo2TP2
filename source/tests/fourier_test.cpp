@@ -53,7 +53,7 @@ static const string test_files[file_amount] = {
 static option_t options[] = {
 	{1, "n", "number", DEFAULT_AMOUNT, opt_number, OPT_DEFAULT},
 	{1, "m", "method", DEFAULT_METHOD, opt_method, OPT_DEFAULT},
-	{1, "e", "error", "1e-3", opt_error, OPT_DEFAULT},
+	{1, "e", "error", "10e-6", opt_error, OPT_DEFAULT},
 	{0, "h", "help", nullptr, opt_help, OPT_DEFAULT},
 	{0, nullptr, nullptr, nullptr, nullptr, 0}
 };
@@ -153,7 +153,7 @@ print_explanation()
 	     << "(este valor puede cambiarse llamando "
 	     << program_name
 	     << " -e <valor>)."
-	     << endl;
+	     << endl << endl;
 }
 
 // Google Test exige que las pruebas estén en un namespace sin nombre
