@@ -1,0 +1,278 @@
+﻿  cmdline.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+  fourier.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\include\fourier.h(37): error C2065: 'M_PI': undeclared identifier
+c:\users\tomas\source\repos\tp2\include\fourier.h(43): error C2065: 'M_PI': undeclared identifier
+c:\users\tomas\source\repos\tp2\include\fourier.h(59): error C2065: 'M_PI': undeclared identifier
+c:\users\tomas\source\repos\tp2\include\fourier.h(68): error C2065: 'M_PI': undeclared identifier
+  io.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\source\io.cpp(10): error C2061: syntax error: identifier 'Vector'
+c:\users\tomas\source\repos\tp2\source\io.cpp(12): error C2065: 'Complex': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\io.cpp(12): error C2062: type 'long double' unexpected
+c:\users\tomas\source\repos\tp2\source\io.cpp(13): error C2065: 'c': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\io.cpp(14): error C2065: 'input': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\io.cpp(14): error C2228: left of '.push_back' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\io.cpp(14): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\io.cpp(14): error C2065: 'c': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\io.cpp(21): error C2061: syntax error: identifier 'Vector'
+c:\users\tomas\source\repos\tp2\source\io.cpp(23): error C2065: 'output': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\io.cpp(23): error C2228: left of '.size' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\io.cpp(23): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\io.cpp(24): error C2065: 'output': undeclared identifier
+  main.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\include\fourier.h(37): error C2065: 'M_PI': undeclared identifier
+c:\users\tomas\source\repos\tp2\include\fourier.h(43): error C2065: 'M_PI': undeclared identifier
+c:\users\tomas\source\repos\tp2\include\fourier.h(59): error C2065: 'M_PI': undeclared identifier
+c:\users\tomas\source\repos\tp2\include\fourier.h(68): error C2065: 'M_PI': undeclared identifier
+  process.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\source\process.cpp(11): error C2653: 'Process': is not a class or namespace name
+c:\users\tomas\source\repos\tp2\source\process.cpp(13): error C2065: '_input': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(13): error C2227: left of '->good' must point to class/struct/union/generic type
+  c:\users\tomas\source\repos\tp2\source\process.cpp(13): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(17): error C2065: '_output': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(17): error C2227: left of '->good' must point to class/struct/union/generic type
+  c:\users\tomas\source\repos\tp2\source\process.cpp(17): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(21): error C2065: '_regression': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(21): error C2227: left of '->good' must point to class/struct/union/generic type
+  c:\users\tomas\source\repos\tp2\source\process.cpp(21): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(25): error C2065: '_transform': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(37): error C2653: 'Process': is not a class or namespace name
+c:\users\tomas\source\repos\tp2\source\process.cpp(46): error C2065: '_input': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(47): error C2065: 'ComplexVector': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(47): error C2146: syntax error: missing ';' before identifier 'inSignal'
+c:\users\tomas\source\repos\tp2\source\process.cpp(47): error C2065: 'inSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(48): error C2065: 'ComplexVector': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(48): error C2146: syntax error: missing ';' before identifier 'outSignal'
+c:\users\tomas\source\repos\tp2\source\process.cpp(48): error C2065: 'outSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(49): error C2065: 'ComplexVector': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(49): error C2146: syntax error: missing ';' before identifier 'regSignal'
+c:\users\tomas\source\repos\tp2\source\process.cpp(49): error C2065: 'regSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(52): error C2065: '_input': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(52): error C2227: left of '->bad' must point to class/struct/union/generic type
+  c:\users\tomas\source\repos\tp2\source\process.cpp(52): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(53): error C3861: 'print_error_on_line': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(58): error C2065: 'inSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(58): error C3861: 'load_signal': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(60): error C3861: 'print_error_on_line': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(63): error C2065: 'outSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(63): error C2228: left of '.reserve' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\process.cpp(63): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(63): error C2065: 'inSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(63): error C2228: left of '.size' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\process.cpp(63): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(64): error C2065: '_transform': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(64): error C2227: left of '->compute' must point to class/struct/union/generic type
+  c:\users\tomas\source\repos\tp2\source\process.cpp(64): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(64): error C2065: 'inSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(64): error C2065: 'outSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(66): error C3861: 'print_error_on_line': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(70): error C2065: '_regression': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(71): error C2065: '_regression': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(72): error C2065: '_input': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(72): error C2227: left of '->bad' must point to class/struct/union/generic type
+  c:\users\tomas\source\repos\tp2\source\process.cpp(72): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(73): error C3861: 'print_error_on_line': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(78): error C2065: 'regSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(78): error C2228: left of '.reserve' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\process.cpp(78): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(78): error C2065: 'outSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(78): error C2228: left of '.size' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\process.cpp(78): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(79): error C2065: 'regSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(79): error C3861: 'load_signal': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(81): error C3861: 'print_error_on_line': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(84): error C2065: 'outSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(84): error C2065: 'regSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(84): error C3861: 'relative_error': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(88): error C2065: '_errorTreshold': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(95): error C2065: 'outSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(95): error C2228: left of '.size' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\process.cpp(95): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(102): error C2065: '_output': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(102): error C2065: 'outSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(102): error C3861: 'print_signal': identifier not found
+c:\users\tomas\source\repos\tp2\source\process.cpp(112): error C2065: 'inSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(112): error C2228: left of '.clear' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\process.cpp(112): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(113): error C2065: 'outSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(113): error C2228: left of '.clear' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\process.cpp(113): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(114): error C2065: 'regSignal': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(114): error C2228: left of '.clear' must have class/struct/union
+  c:\users\tomas\source\repos\tp2\source\process.cpp(114): note: type is 'unknown-type'
+c:\users\tomas\source\repos\tp2\source\process.cpp(119): error C2653: 'Process': is not a class or namespace name
+c:\users\tomas\source\repos\tp2\source\process.cpp(120): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\tomas\source\repos\tp2\source\process.cpp(121): error C2065: '_input': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(122): error C2065: '_input': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(122): error C2541: 'delete': cannot delete objects that are not pointers
+c:\users\tomas\source\repos\tp2\source\process.cpp(123): error C2065: '_output': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(124): error C2065: '_output': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(124): error C2541: 'delete': cannot delete objects that are not pointers
+c:\users\tomas\source\repos\tp2\source\process.cpp(125): error C2065: '_regression': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(125): error C2541: 'delete': cannot delete objects that are not pointers
+c:\users\tomas\source\repos\tp2\source\process.cpp(126): error C2065: '_transform': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(126): error C2541: 'delete': cannot delete objects that are not pointers
+c:\users\tomas\source\repos\tp2\source\process.cpp(127): warning C4508: 'Process': function should return a value; 'void' return type assumed
+c:\users\tomas\source\repos\tp2\source\process.cpp(130): error C2653: 'Process': is not a class or namespace name
+c:\users\tomas\source\repos\tp2\source\process.cpp(130): error C2065: 'ComplexVector': undeclared identifier
+c:\users\tomas\source\repos\tp2\source\process.cpp(130): error C2059: syntax error: 'const'
+c:\users\tomas\source\repos\tp2\source\process.cpp(131): error C2143: syntax error: missing ';' before '{'
+c:\users\tomas\source\repos\tp2\source\process.cpp(131): error C2447: '{': missing function header (old-style formal list?)
+  Complex_test.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\source\tests\complex_test.cpp(6): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  fourier_test.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\source\tests\fourier_test.cpp(7): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_all.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\codegear\gtest_all.cc(38): fatal error C1083: Cannot open include file: 'src/gtest-all.cc': No such file or directory
+  gtest_link.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\codegear\gtest_link.cc(39): warning C4068: unknown pragma
+c:\users\tomas\source\repos\tp2\source\tests\googletest\codegear\gtest_link.cc(40): warning C4068: unknown pragma
+  sample10_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample10_unittest.cc(37): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  sample1_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample1_unittest.cc(48): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  sample2.cc
+  sample2_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample2_unittest.cc(44): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  sample3_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample3_unittest.cc(67): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  sample4.cc
+  sample4_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample4_unittest.cc(33): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  sample5_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample5_unittest.cc(49): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  sample6_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample6_unittest.cc(38): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  sample7_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample7_unittest.cc(41): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  sample8_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample8_unittest.cc(39): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  Generating Code...
+  Compiling...
+  sample9_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\samples\sample9_unittest.cc(37): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-all.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest-all.cc(39): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-death-test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest-death-test.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest-death-test.h': No such file or directory
+  gtest-filepath.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest-filepath.cc(30): fatal error C1083: Cannot open include file: 'gtest/internal/gtest-filepath.h': No such file or directory
+  gtest-port.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest-port.cc(32): fatal error C1083: Cannot open include file: 'gtest/internal/gtest-port.h': No such file or directory
+  gtest-printers.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest-printers.cc(45): fatal error C1083: Cannot open include file: 'gtest/gtest-printers.h': No such file or directory
+  gtest-test-part.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest-test-part.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest-test-part.h': No such file or directory
+  gtest-typed-test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest-typed-test.cc(32): fatal error C1083: Cannot open include file: 'gtest/gtest-typed-test.h': No such file or directory
+  gtest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_main.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\src\gtest_main.cc(32): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-death-test_ex_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-death-test_ex_test.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest-death-test.h': No such file or directory
+  gtest-death-test_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-death-test_test.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest-death-test.h': No such file or directory
+  gtest-filepath_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-filepath_test.cc(39): fatal error C1083: Cannot open include file: 'gtest/internal/gtest-filepath.h': No such file or directory
+  gtest-linked_ptr_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-linked_ptr_test.cc(33): fatal error C1083: Cannot open include file: 'gtest/internal/gtest-linked_ptr.h': No such file or directory
+  gtest-listener_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-listener_test.cc(36): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-message_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-message_test.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest-message.h': No such file or directory
+  gtest-options_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-options_test.cc(40): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-param-test2_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-param-test2_test.cc(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-param-test_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-param-test_test.cc(36): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-port_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-port_test.cc(34): fatal error C1083: Cannot open include file: 'gtest/internal/gtest-port.h': No such file or directory
+  Generating Code...
+  Compiling...
+  gtest-printers_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-printers_test.cc(36): fatal error C1083: Cannot open include file: 'gtest/gtest-printers.h': No such file or directory
+  gtest-test-part_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-test-part_test.cc(33): fatal error C1083: Cannot open include file: 'gtest/gtest-test-part.h': No such file or directory
+  gtest-tuple_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-tuple_test.cc(32): fatal error C1083: Cannot open include file: 'gtest/internal/gtest-tuple.h': No such file or directory
+  gtest-typed-test2_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-typed-test_test.h(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-typed-test_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-typed-test_test.h(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest-unittest-api_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-unittest-api_test.cc(36): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_all_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest-filepath_test.cc(39): fatal error C1083: Cannot open include file: 'gtest/internal/gtest-filepath.h': No such file or directory
+  gtest_assert_by_exception_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_assert_by_exception_test.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_break_on_failure_unittest_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_break_on_failure_unittest_.cc(42): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_catch_exceptions_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_catch_exceptions_test_.cc(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_color_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_color_test_.cc(38): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_environment_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_environment_test.cc(36): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_env_var_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_env_var_test_.cc(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_filter_unittest_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_filter_unittest_.cc(41): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_help_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_help_test_.cc(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_list_tests_unittest_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_list_tests_unittest_.cc(41): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_main_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_main_unittest.cc(32): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_no_test_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_no_test_unittest.cc(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_output_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_output_test_.cc(38): fatal error C1083: Cannot open include file: 'gtest/gtest-spi.h': No such file or directory
+  gtest_pred_impl_unittest.cc
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_pred_impl_unittest.cc(52): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  Generating Code...
+  Compiling...
+  gtest_premature_exit_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_premature_exit_test.cc(37): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_prod_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\production.h(37): fatal error C1083: Cannot open include file: 'gtest/gtest_prod.h': No such file or directory
+  gtest_repeat_test.cc
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_repeat_test.cc(36): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_shuffle_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_shuffle_test_.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_sole_header_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_sole_header_test.cc(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_stress_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_stress_test.cc(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_throw_on_failure_ex_test.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_throw_on_failure_ex_test.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_throw_on_failure_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_throw_on_failure_test_.cc(38): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_uninitialized_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_uninitialized_test_.cc(32): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_unittest.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_unittest.cc(35): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_xml_outfile1_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_xml_outfile1_test_.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_xml_outfile2_test_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_xml_outfile2_test_.cc(34): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  gtest_xml_output_unittest_.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\gtest_xml_output_unittest_.cc(39): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  production.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\test\production.h(37): fatal error C1083: Cannot open include file: 'gtest/gtest_prod.h': No such file or directory
+  widget.cc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\xcode\samples\frameworksample\widget.h(40): fatal error C1083: Cannot open type library file: 'c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\string': Fehler beim Laden der Typbibliothek/DLL.
+  
+  widget_test.cc
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xlocale(313): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+c:\users\tomas\source\repos\tp2\source\tests\googletest\xcode\samples\frameworksample\widget_test.cc(39): fatal error C1083: Cannot open include file: 'gtest/gtest.h': No such file or directory
+  Generating Code...
