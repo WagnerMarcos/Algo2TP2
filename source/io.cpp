@@ -9,7 +9,7 @@ using namespace std;
 bool
 load_signal(istream & is, Vector<Complex<> > & input)
 {
-	Complex <long double> c;
+	Complex<> c;
 	while (is >> c)
 		input.push_back(c);
 	if (is.bad())
