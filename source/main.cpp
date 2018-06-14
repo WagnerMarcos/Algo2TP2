@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
+#include <limits>
 
 #include "main.h"
 
@@ -57,8 +58,11 @@ opt_error(string const &arg)
 		long double read_value;
 		char * nextChar;
 		read_value = strtold(arg.c_str(), &nextChar);
-		if (!nextChar || *nextChar != '\n') { // si fue válido
+		if (nextChar && *nextChar == '\0') { // si fue válido
 			process.error_treshold(read_value);
+		}
+		else {
+			process.error_treshold(numeric_limits<long double>::infinity());
 		}
 	}
 }
@@ -73,6 +77,7 @@ opt_method(string const &arg)
 	if (!(iss >> read_method) || iss.bad()) {
 		cerr << "Cannot read method."
 		     << endl;
+		return;
 	}
 
 	chosen_method = choose_method(read_method);
@@ -83,6 +88,7 @@ opt_method(string const &arg)
 		     << "."
 		     << endl;
 		opt_help();
+		return;
 	}
 	process.transform(new FourierTransform(chosen_method));
 }

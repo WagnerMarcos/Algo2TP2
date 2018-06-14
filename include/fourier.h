@@ -75,5 +75,16 @@ class IFFT : public Fast {
 	}
 };
 
+inline ComplexVector& fill_until_power_of_two(ComplexVector& v) {
+	size_t n = v.size();
+	if (n & (n - 1)) { // si el tamaño no es una potencia de dos...
+		while (n & (n - 1)) {
+			v.push_back(0); // ...rellenar con ceros hasta que lo sea.
+			++n;
+		}
+	}
+	return v;
+}
+
 
 #endif	// _FOURIER_H_INCLUDED_

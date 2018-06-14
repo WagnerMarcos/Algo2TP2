@@ -27,11 +27,7 @@ Fast::compute(ComplexVector const & input, ComplexVector & output) const
 
 	if (n & (n - 1)) { // si el tamaño no es una potencia de dos...
 		ComplexVector auxInput(input);
-		while (n & (n - 1)) {
-			auxInput.push_back(0); // ...rellenar con ceros hasta que lo sea.
-			++n;
-		}
-		output = _compute(auxInput);
+		output = _compute(fill_until_power_of_two(auxInput));
 	}
 	else
 		output = _compute(input);
