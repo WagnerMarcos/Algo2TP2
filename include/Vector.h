@@ -1,5 +1,5 @@
-#ifndef _VECTOR_H_INCLUDED_
-#define _VECTOR_H_INCLUDED_
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <cassert>
 
@@ -105,4 +105,4 @@ public:
 	}
 };
 
-#endif	//_VECTOR_H_INCLUDED_
+#endif	//VECTOR_H

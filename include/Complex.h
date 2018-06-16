@@ -1,5 +1,5 @@
-#ifndef _COMPLEX_H_INCLUDED_
-#define _COMPLEX_H_INCLUDED_
+#ifndef COMPLEX_H
+#define COMPLEX_H
 
 #include <iostream>
 #include <limits>
@@ -16,7 +16,7 @@ class Complex {
 	T y;
 	static T acceptableDelta;
 public:
-	Complex(T real = 0, T imag = 0) : x(real), y(imag) {}
+	Complex(T real = T{}, T imag = T{}) : x(real), y(imag) {}
 	Complex(const Complex& C) : x(C.x), y(C.y) {}
 	~Complex() {}
 
@@ -132,7 +132,7 @@ public:
 template <typename T>
 T Complex<T>::acceptableDelta = 10e-6;
 
-const Complex <long double> I(0, 1);
+Complex <long double> I(0, 1);
 
 // Función para la comparación que comprueba si dos números difieren en lo
 // suficientemente poco.
@@ -162,4 +162,4 @@ exp(const Complex <T> & c)
 	       std::exp(c.re()) * std::sin(c.im()));
 }
 
-#endif	//_COMPLEX_H_INCLUDED_
+#endif	//COMPLEX_H
