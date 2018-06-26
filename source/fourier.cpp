@@ -26,11 +26,10 @@ Fast::compute(ComplexVector const & input, ComplexVector & output) const
 	size_t n = input.size();
 
 	if (n & (n - 1)) { // si el tamaño no es una potencia de dos...
-		ComplexVector auxInput(input);
-		output = _compute(fill_until_power_of_two(auxInput));
+		return false;
 	}
-	else
-		output = _compute(input);
+
+	output = _compute(input);
 
 	for (size_t i = 0; i < output.size(); ++i)
 		output[i] /= _divisor(output.size());
@@ -58,7 +57,7 @@ Fast::_compute(ComplexVector const & input) const
 	ComplexVector outputOdd(_compute(inputOdd));
 
 	ComplexVector output(n);
-	for (size_t k = 0; k < n / 2; ++k){
+	for (size_t k = 0; k < n / 2; ++k) {
 		output[k] = outputEven[k] + _coefficient(k, n) * outputOdd[k];
 		output[k + n/2] = outputEven[k] - _coefficient(k, n) * outputOdd[k];
 	}

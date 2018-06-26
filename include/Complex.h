@@ -132,7 +132,7 @@ public:
 template <typename T>
 T Complex<T>::acceptableDelta = 10e-6;
 
-Complex <long double> I(0, 1);
+const Complex <long double> I(0, 1);
 
 // Función para la comparación que comprueba si dos números difieren en lo
 // suficientemente poco.
