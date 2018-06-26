@@ -11,25 +11,26 @@ bool
 Process::validate_settings()
 {
 	if (!_input || !_input->good()) {
-		cerr << "Could not open input file." << endl;
+		cerr << "Error: Could not open input file." << endl;
 		return false;
 	}
 	if (!_output || !_output->good()) {
-		cerr << "Could not open output file." << endl;
+		cerr << "Error: Could not open output file." << endl;
 		return false;
 	}
 	if (_regression && !_regression->good()) {
-		cerr << "Could not open regression file." << endl;
+		cerr << "Error: Could not open regression file." << endl;
 		return false;
 	}
 	if (!_transform) {
-		cerr << "Could not set transform file." << endl;
+		cerr << "Error: Could not set chosen transform." << endl;
 		return false;
 	}
-/*
-	_output->setf(ios::fixed, ios::floatfield);
+	if (_errorTreshold == numeric_limits<long double>::infinity()) {
+		cerr << "Error: Could not set error treshold." << endl;
+		return false;
+	}
 	_output->precision(6);
-*/
 	return true;
 }
 
@@ -41,32 +42,34 @@ Process::run()
 
 	string s;
 	bool status;
+	bool aTestFailed = false;
 	long double error;
 
 	for (int lineNo = 1; getline(*_input, s); ++lineNo) {
-		ComplexVector inSignal;
-		ComplexVector outSignal;
-		ComplexVector regSignal;
-		istringstream line;
+		istringstream line(s);
 		
 		if (_input->bad()) {
 			print_error_on_line(line.str(), lineNo);
 			return false;
 		}
-		line.str(s);
-		line.clear(); // vacía los flags del istringstream
+		ComplexVector inSignal;
 		status = load_signal(line, inSignal);
 		if (!status) {
 			print_error_on_line(line.str(), lineNo);
 			return false;
 		}
-		outSignal.reserve(inSignal.size());
-		status = _transform->compute(inSignal, outSignal);
+
+		ComplexVector outSignal;
+		status = _transform->compute(fill_until_power_of_two(inSignal), outSignal);
 		if (!status) {
 			print_error_on_line(line.str(), lineNo);
 			return false;
 		}
-		// si hay que procesar el archivo de regresiones
+
+		// Si hay que procesar el archivo de regresiones
+		// se lee de este y se compara, calculando el
+		// error relativo, con la transformada obtenida.
+		//
 		if (_regression) {
 			getline(*_regression, s);
 			if (_input->bad()) {
@@ -75,30 +78,31 @@ Process::run()
 			}
 			line.str(s);
 			line.clear();
-			regSignal.reserve(outSignal.size());
+			ComplexVector regSignal;
 			status = load_signal(line, regSignal);
 			if (!status) {
 				print_error_on_line(line.str(), lineNo);
 				return false;
 			}
 			error = relative_error(outSignal, regSignal);
-			cout << "test "
-			     << lineNo
-			     << " ";
-			if (error <= _errorTreshold) {
-				cout << "ok";
-			}
-			else {
-				cout << "error";
-			}
-			cout << " "
-			     << outSignal.size()
-			     << " "
-			     << std::scientific
-			     << error
-			     << endl;
+			status = error <= _errorTreshold;
+			if (!status)
+				aTestFailed = true;
+			_output->setf(ios::scientific, ios::floatfield);
+			*_output << "test "
+			         << lineNo
+			         << (status ? " ok " : " error ")
+			         << outSignal.size()
+			         << " "
+			         << error
+			         << endl;
+
 		}
-		else { // si no, imprimir la señal.
+		// Si no hay archivo de regresiones, imprimir
+		// la transformada.
+		//
+		else {
+			_output->setf(ios::fixed, ios::floatfield);
 			status = print_signal(*_output, outSignal);
 			if (!status) {
 				cerr << "Cannot write to output stream."
@@ -106,13 +110,8 @@ Process::run()
 				return false;
 			}
 		}
-		// vacía los vectores para reutilizarlos en el siguiente ciclo. 
-		//
-		inSignal.clear();
-		outSignal.clear();
-		regSignal.clear();
-	}
-	return status;
+	} // fin del ciclo for
+	return aTestFailed; // si una prueba falló, devuelve true
 }
 
 Process::~Process()

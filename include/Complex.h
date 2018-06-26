@@ -28,31 +28,31 @@ public:
 	static T acceptable_delta(const T& delta) {
 		return Complex::acceptableDelta = delta;
 	}
-	const Complex conj() const {
+	Complex conj() const {
 		return Complex(x, -y);
 	}
-	const T norm() const {
+	T norm() const {
 		return sqrt(x*x + y*y);
 	}
-	const T arg() const {
+	T arg() const {
 		return std::atan2(y,x);
 	}
-	const Complex operator+() const {
+	Complex operator+() const {
 		return Complex(+x, +y);
 	}
-	const Complex operator-() const {
+	Complex operator-() const {
 		return Complex(-x, -y);
 	}
-	const Complex operator+(const Complex& c) const {
+	Complex operator+(const Complex& c) const {
 		return Complex(x + c.x, y + c.y);
 	}
-	const Complex operator-(const Complex& c) const {
+	Complex operator-(const Complex& c) const {
 		return Complex(x - c.x, y - c.y);
 	}
-	const Complex operator*(const Complex& c) const {
+	Complex operator*(const Complex& c) const {
 		return Complex(x*c.x - y*c.y, y*c.x + x*c.y);
 	}
-	const Complex operator/(const Complex& c) const {
+	Complex operator/(const Complex& c) const {
 		return Complex((x*c.x + y*c.y) / (c.x*c.x + c.y*c.y),
 		               (y*c.x - x*c.y) / (c.x*c.x + c.y*c.y));
 	}
