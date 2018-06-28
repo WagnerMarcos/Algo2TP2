@@ -1,5 +1,5 @@
-#ifndef _FOURIER_TEST_H_INCLUDED_
-#define _FOURIER_TEST_H_INCLUDED_
+#ifndef FOURIER_TEST_H
+#define FOURIER_TEST_H
 
 #include "cmdline.h"
 #include "io.h"
@@ -15,4 +15,4 @@ static void opt_method(std::string const &);
 static void opt_error(std::string const &);
 static void opt_help(std::string const & = "");
 
-#endif // _FOURIER_TEST_H_INCLUDED_
+#endif // FOURIER_TEST_H

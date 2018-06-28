@@ -26,7 +26,7 @@ public:
 	std::ostream* output() const { return _output; }
 	std::istream* regression() const { return _regression; }
 	const FourierTransform* transform() const { return _transform; }
-	long double error_treshold() const { return _errorTreshold; }
+	long double error_threshold() const { return _errorThreshold; }
 
 	// Setters
 	//
@@ -46,9 +46,9 @@ public:
 		_transform = t;
 		return _transform;
 	}
-	long double error_treshold(double treshold) {
-		_errorTreshold = treshold;
-		return _errorTreshold;
+	long double error_threshold(double threshold) {
+		_errorThreshold = threshold;
+		return _errorThreshold;
 	}
 
 private:
@@ -56,7 +56,7 @@ private:
 	std::ostream* _output = &std::cout;
 	std::istream* _regression = nullptr;
 	FourierTransform* _transform = nullptr;
-	long double _errorTreshold = 1e-3;
+	long double _errorThreshold = 1e-3;
 	bool validate_settings();
 	// Función que calcula el error relativo
 	// entre lo transformado y el archivo

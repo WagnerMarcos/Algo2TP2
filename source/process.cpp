@@ -26,8 +26,8 @@ Process::validate_settings()
 		cerr << "Error: Could not set chosen transform." << endl;
 		return false;
 	}
-	if (_errorTreshold == numeric_limits<long double>::infinity()) {
-		cerr << "Error: Could not set error treshold." << endl;
+	if (_errorThreshold == numeric_limits<long double>::infinity()) {
+		cerr << "Error: Could not set error threshold." << endl;
 		return false;
 	}
 	_output->precision(6);
@@ -85,7 +85,7 @@ Process::run()
 				return false;
 			}
 			error = relative_error(outSignal, regSignal);
-			status = error <= _errorTreshold;
+			status = error <= _errorThreshold;
 			if (!status)
 				aTestFailed = true;
 			_output->setf(ios::scientific, ios::floatfield);
@@ -125,14 +125,16 @@ Process::~Process()
 }
 
 long double
-Process::relative_error(ComplexVector const& result, ComplexVector const& regression)
+Process::relative_error(ComplexVector const& result, 
+                        ComplexVector const& regression)
 {
 	long double outputSquaredNormSum = 0;
 	long double regSquaredNormSum = 0;
 	for(size_t i = 0; i < result.size(); ++i) {
-		outputSquaredNormSum += ((result[i] - regression[i]).norm() * (result[i] - regression[i]).norm());
-		regSquaredNormSum += (regression[i].norm() * regression[i].norm());
+		outputSquaredNormSum += (result[i] - regression[i]).norm() * 
+		                        (result[i] - regression[i]).norm();
+		regSquaredNormSum += regression[i].norm() * regression[i].norm();
 	}
-	return sqrt( outputSquaredNormSum / regSquaredNormSum);
+	return sqrt(outputSquaredNormSum / regSquaredNormSum);
 }
 

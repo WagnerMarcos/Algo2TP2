@@ -59,10 +59,10 @@ opt_error(string const &arg)
 		char * nextChar;
 		read_value = strtold(arg.c_str(), &nextChar);
 		if (nextChar && *nextChar == '\0') { // si fue válido
-			process.error_treshold(read_value);
+			process.error_threshold(read_value);
 		}
 		else {
-			process.error_treshold(numeric_limits<long double>::infinity());
+			process.error_threshold(numeric_limits<long double>::infinity());
 		}
 	}
 }

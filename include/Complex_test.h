@@ -1,5 +1,5 @@
-#ifndef _COMPLEX_TEST_H_INCLUDED_
-#define _COMPLEX_TEST_H_INCLUDED_
+#ifndef COMPLEX_TEST_H
+#define COMPLEX_TEST_H
 
 #include "cmdline.h"
 #include "Complex.h"
@@ -10,4 +10,4 @@
 static void opt_number(std::string const &);
 static void opt_help(std::string const & = "");
 
-#endif // _COMPLEX_TEST_H_INCLUDED_
+#endif // COMPLEX_TEST_H

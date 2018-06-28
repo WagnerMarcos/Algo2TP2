@@ -15,9 +15,17 @@ public:
 	}
 	// Reserva espacio para count elementos y les asigna el valor value:
 	//
-	Vector(size_t count, T const & value = T{}) : data(new T[count]{value}), allocated(count), used(count) {
+	Vector(size_t count, T const & value = T{}) :
+		data(new T[count]{value}),
+		allocated(count),
+		used(count) 
+	{
 	}
-	Vector(const Vector& v) : data(new T[v.used]), allocated(v.used), used(v.used) {
+	Vector(const Vector& v) : 
+		data(new T[v.used]),
+		allocated(v.used), 
+		used(v.used) 
+	{
 		for (size_t i = 0; i < used; ++i)
 			data[i] = (v.data)[i];
 	}

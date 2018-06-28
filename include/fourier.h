@@ -1,5 +1,7 @@
 #ifndef FOURIER_H
-#define  FOURIER_H
+#define FOURIER_H
+
+#include <cmath>
 
 #include "Complex.h"
 #include "Vector.h"
