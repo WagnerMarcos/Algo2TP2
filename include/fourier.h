@@ -1,5 +1,5 @@
-#ifndef _FOURIER_H_INCLUDED_
-#define  _FOURIER_H_INCLUDED_
+#ifndef FOURIER_H
+#define  FOURIER_H
 
 #include "Complex.h"
 #include "Vector.h"
@@ -87,4 +87,4 @@ inline ComplexVector& fill_until_power_of_two(ComplexVector& v) {
 }
 
 
-#endif	// _FOURIER_H_INCLUDED_
+#endif	// FOURIER_H

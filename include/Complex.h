@@ -1,5 +1,5 @@
-#ifndef _COMPLEX_H_INCLUDED_
-#define _COMPLEX_H_INCLUDED_
+#ifndef COMPLEX_H
+#define COMPLEX_H
 
 #include <iostream>
 #include <limits>
@@ -162,4 +162,4 @@ exp(const Complex <T> & c)
 	       std::exp(c.re()) * std::sin(c.im()));
 }
 
-#endif	//_COMPLEX_H_INCLUDED_
+#endif	//COMPLEX_H

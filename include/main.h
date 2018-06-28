@@ -1,5 +1,5 @@
-#ifndef _MAIN_H_INCLUDED_
-#define _MAIN_H_INCLUDED_
+#ifndef MAIN_H
+#define MAIN_H
 
 #include "cmdline.h"
 #include "fourier.h"
@@ -13,4 +13,4 @@ static void opt_method(std::string const &);
 static void opt_help(std::string const & = "");
 FourierAlgorithm* choose_method(std::string read_method);
 
-#endif	// _MAIN_H_INCLUDED_
+#endif	// MAIN_H

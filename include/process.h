@@ -1,5 +1,5 @@
-#ifndef _PROCESS_H_INCLUDED_
-#define _PROCESS_H_INCLUDED_
+#ifndef PROCESS_H
+#define PROCESS_H
 
 #include "fourier.h"
 #include "Vector.h"
@@ -66,4 +66,4 @@ private:
 
 };
 
-#endif // _PROCESS_H_INCLUDED_
+#endif // PROCESS_H

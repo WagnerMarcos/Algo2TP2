@@ -1,5 +1,5 @@
-#ifndef _CMDLINE_H_INCLUDED_
-#define _CMDLINE_H_INCLUDED_
+#ifndef CMDLINE_H
+#define CMDLINE_H
 
 #include <string>
 #include <iostream>
@@ -27,4 +27,4 @@ public:
 	void parse(int, char * const []) const;
 };
 
-#endif
+#endif // CMDLINE_H
